@@ -24,7 +24,7 @@ Up arrow to roate the piece (note that the piece will not rotate if it is too cl
 
 Down arrow to move the piece down
 
-Spacebar to instantly drow the piece
+Spacebar to instantly drop the piece
 
 C to swap pieces
 
