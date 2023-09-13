@@ -1,7 +1,7 @@
 # tetris-game
 Tetris coded in Java using Swing and Abstract Web Toolkit for graphics
 
-For some reason keyboard input does not work on my Windows 11 machine, but works fine on Linux.  I'd like to fix this sometime in the future.
+For some reason keyboard input does not work consistantly on my Windows 11 machine, but works fine on Linux.  I'd like to fix this sometime in the future.  For best results on Windows 11, make sure that the game is in focus and wait ~5 seconds after running the program to make your first keyboard input.
 
 To run, ensure that all files are in the same folder.  Then compile and run Tetris.java.  Do not attempt to close or quit the program while it is running, as it will not save the high score and will result in the following error the next time you run it.  Instead, repeatedly hit the spacebar until the game ends.
 
