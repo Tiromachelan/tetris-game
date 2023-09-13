@@ -16,6 +16,8 @@ Exception in thread "main" java.util.NoSuchElementException
 
 This means that the integer saved in highscore.txt was deleted; just add an integer to that file and it should work again.
 
+You will see a lot of other exceptions in the terminal at times; just ignore them.
+
 Right arrow to move the piece right
 
 Left arrow to move the piece left
