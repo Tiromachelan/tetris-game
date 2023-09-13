@@ -20,7 +20,7 @@ Right arrow to move the piece right
 
 Left arrow to move the piece left
 
-Up arrow to roate the piece (note that the piece will not rotate if it is too close to another piece, or any of the 4 borders of the grid)
+Up arrow to rotate the piece (note that the piece will not rotate if it is too close to another piece, or any of the 4 borders of the grid)
 
 Down arrow to move the piece down
 
