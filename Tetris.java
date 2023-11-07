@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Tetris extends JPanel {
    public static void main(String[] args) throws IOException {
       int highScore = 0;
-      Scanner reader = new Scanner(new File("highscore.txt"));
+      Scanner reader = new Scanner(new File("highscore.txt")); // High score is stored here
       highScore = reader.nextInt();
       JFrame frame = new JFrame("Tetris");
       JPanel tetris_panel = new JPanel();    
@@ -30,7 +30,7 @@ public class Tetris extends JPanel {
       // Run the game
       while (true) {
          try {
-            Thread.sleep(1000 - (tetris.getScore() * 10));
+            Thread.sleep(1000 - (tetris.getScore() * 10)); // Shapes fall faster as score increases
          } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
          }
@@ -115,11 +115,11 @@ public class Tetris extends JPanel {
       frame.setComponentZOrder(tetris_panel, 0);
    }
 
-   public void callNewGame() {
+   public void callNewGame() { // Called from Shape.java
       newGame();
    }
 
-   public static void newGame() {
+   public static void newGame() { // Instead of manaually resetting everything, Tetris.java will call itself again.
       try {
          String java = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
          String className = Tetris.class.getCanonicalName();
