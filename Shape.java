@@ -483,7 +483,6 @@ public class Shape {
          shapes[i] = shapes[i + 1];
       }
       shapes[4] = (int)(Math.random() * 7) + 1;
-      System.out.println(score);
    }
 
    public void swap() {
@@ -1465,6 +1464,9 @@ public class Shape {
             y = outlineY;
             tetris.repaint();
             move();
+         }
+         if (gameOver) {
+            tetris.callNewGame();
          }
       }
       if ((e.getKeyCode() == KeyEvent.VK_C)) {

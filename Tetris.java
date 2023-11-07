@@ -9,7 +9,6 @@ public class Tetris extends JPanel {
       int highScore = 0;
       Scanner reader = new Scanner(new File("highscore.txt"));
       highScore = reader.nextInt();
-      PrintWriter out = new PrintWriter("highscore.txt");
       JFrame frame = new JFrame("Tetris");
       JPanel tetris_panel = new JPanel();    
       JLabel score_label = new JLabel("<html> Score: 0 <br> High Score: " + highScore + "</html>");     
@@ -19,9 +18,14 @@ public class Tetris extends JPanel {
       tetris_panel.add(tetris);
       frame.setSize(670, 838);
       frame.setVisible(true);
-      frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       frame.add(score_label, BorderLayout.CENTER);
       frame.add(tetris_panel, BorderLayout.LINE_START);
+      frame.addWindowListener(new WindowAdapter() {
+         public void windowClosing(WindowEvent e) {
+            System.exit(0);
+         }
+      });
+      tetris.requestFocusInWindow();
 
       // Run the game
       while (true) {
@@ -30,15 +34,21 @@ public class Tetris extends JPanel {
          } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
          }
-         tetris.move();
-         score_label.setText("<html> Score: " + tetris.getScore() + "<br> High Score: " + highScore + "</html>");
-         if (tetris.getScore() > highScore) {
-            highScore = tetris.getScore();
-         }
-         if (tetris.getGameOver()) {
+         if (!tetris.getGameOver()) {
+            tetris.move();
+            score_label.setText("<html> Score: " + tetris.getScore() + "<br> High Score: " + highScore + "</html>");
+            if (tetris.getScore() > highScore) {
+               highScore = tetris.getScore();
+               PrintWriter out = new PrintWriter("highscore.txt");
+               out.print(highScore);
+               out.close();
+            }
+         } else {
+            PrintWriter out = new PrintWriter("highscore.txt");
             out.print(highScore);
             out.close();
-            System.exit(0);
+            tetris.displayGameOverScreen(tetris_panel, score_label, tetris, highScore, frame);
+            break;
          }
          tetris.repaint();
       }
@@ -56,7 +66,7 @@ public class Tetris extends JPanel {
 		});
 		setFocusable(true);
 	}
-   
+
    public void move() {
       shape.move();
    }
@@ -79,5 +89,45 @@ public class Tetris extends JPanel {
       super.paint(g);
       shape.paint(g2d);
       grid.paint(g2d);
+   }
+
+   public void displayGameOverScreen(JPanel tetris_panel, JLabel score_label, Tetris tetris, int highScore, JFrame frame) {
+      StringBuilder gameOverSpaces = new StringBuilder();
+      StringBuilder scoreSpaces = new StringBuilder();
+      StringBuilder highScoreSpaces = new StringBuilder();
+      StringBuilder newGameSpaces = new StringBuilder();
+      for (int i = 0; i < 98; i++) {
+         if (i < 35) {
+            gameOverSpaces.append("\u00a0");
+         }
+         if (i < 98) {
+            scoreSpaces.append("\u00a0");
+         }
+         if (i < 93) {
+            highScoreSpaces.append("\u00a0");
+         }
+         if (i < 79) {
+            newGameSpaces.append("\u00a0");
+         }
+      }
+
+      score_label.setText("<html>" + scoreSpaces + "Score: " + tetris.getScore() + "<br>" + highScoreSpaces.toString() + "High Score: " + highScore + "<br> <H1>" + gameOverSpaces.toString() + "GAME OVER </H1> <br>" + newGameSpaces.toString() + "Press spacebar to play again </br> </html>");
+      frame.setComponentZOrder(tetris_panel, 0);
+   }
+
+   public void callNewGame() {
+      newGame();
+   }
+
+   public static void newGame() {
+      try {
+         String java = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+         String className = Tetris.class.getCanonicalName();
+         ProcessBuilder builder = new ProcessBuilder(java, className);
+         builder.start();
+         System.exit(0);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
    }
 }
