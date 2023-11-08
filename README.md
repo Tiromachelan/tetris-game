@@ -3,7 +3,7 @@ Tetris coded in Java using Swing and Abstract Web Toolkit for graphics
 
 To run, ensure that all files are in the same folder.  Then compile and run Tetris.java.
 
-The following error may occur in some (rare) cases when the program is closed before it has a change to write the high score to the txt file. If you get the following error:
+The following error may occur in some (rare) cases when the program is closed before it has a chance to write the high score to the txt file. If you get the following error:
 
 Exception in thread "main" java.util.NoSuchElementException
         at java.base/java.util.Scanner.throwFor(Scanner.java:937)
