@@ -26,3 +26,4 @@ Spacebar to instantly drop the piece
 
 C to swap pieces
 
+Pieces may not rotate if they are too close to a wall or another piece.
