@@ -27,5 +27,3 @@ Down arrow to move the piece down
 Spacebar to instantly drop the piece
 
 C to swap pieces (only works if there is space for the new piece)
-
-Pieces may not rotate if they are too close to a wall or another piece.
